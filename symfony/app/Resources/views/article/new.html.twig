@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <nav>
+        <a href="{{ path('article_index') }}">Back to the list</a>
+    </nav>
+
+    <h1>Article creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+    <input class="btn-primary" type="submit" value="Create" />
+    {{ form_end(form) }}
+
+{% endblock %}

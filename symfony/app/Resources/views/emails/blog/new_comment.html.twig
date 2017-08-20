@@ -1,0 +1,7 @@
+{% extends 'emails/layout.html.twig' %}
+
+{% block body %}
+    <p>Pseudo: {{ comment.getPseudo() }}</p>
+    <p>Email: <{{ comment.getEmail() }}/p>
+    <p>{{ comment.getComment() }}</p>
+{% endblock %}

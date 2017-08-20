@@ -1,0 +1,128 @@
+{% extends 'layout.html.twig' %}
+
+{% block page_title %}Blog{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+<script>window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function(f) {
+            t._e.push(f);
+        };
+
+        return t;
+    }(document, "script", "twitter-wjs"));
+</script>
+{% endblock %}
+
+{% block body %}
+<div id="blog" class="container">
+    <div class="row">
+
+        <div class="col-md-3">
+            <nav>
+                <div class="row">
+                    <section class="content row container">
+                        <h3 class="row">
+                            <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
+                            Categories
+                        </h3>
+                        <ul>
+                            {% for category in categories %}
+                            <li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> <a href="{{ path('article_index', {'category': category.getName() }) }}">{{ category.getName() }}</a> <!--<span class="badge">42</span>--></li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                </div>
+                <!--
+                <div class="row">
+                    <section class="content row container">
+                        <h3 class="row">
+                            <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
+                            Archives
+                        </h3>
+                        <ul>
+                            <li><a href="#">Catégorie</a></li>
+                            <li><a href="#">Catégorie</a></li>
+                            <li><a href="#">Catégorie</a></li>
+                        </ul>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="content row container">
+                        <h3 class="row">
+                            <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
+                            Pub
+                        </h3>
+                    </section>
+                </div>
+                -->
+            </nav>
+        </div>
+
+        <div class="col-md-6">
+        {% block flashes %}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+
+                    <div class="alert alert-{{ label }}" role="alert">
+                        <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+                        <strong>{{ message }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endblock %}
+
+        {% block breadcrumb %}
+            <ol class="breadcrumb">
+                <li><a href="{{ path('article_index') }}">Blog</a></li>
+                {% if article is defined %}
+                    <li><a href="{{ path('article_index', {'category': article.getCategory().getName() }) }}">{{ article.getCategory().getName() }}</a></li>
+                    {% if article.title is defined %}
+                        <li class="active"><a href="{{ path('article_show', {'id': article.getId(), 'slug': article.getSlug()}) }}">{{ article.title }}</a></li>
+                    {% endif %}
+                {% endif %}
+            </ol>
+        {% endblock %}
+        {% block articles %}
+        {% endblock %}
+        </div>
+
+        <!--
+        <div class="col-md-3">
+            <nav>
+                <div class="row">
+                    <section class="content row container">
+                        <h3 class="row">
+                            <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
+                            Abonnez vous !
+                        </h3>
+                        <div id="rss_subscribe">
+                            <i class="fa fa-rss-square" aria-hidden="true"></i>
+                        </div>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="content row container">
+                        <h3 class="row">
+                            <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
+                            Pub
+                        </h3>
+                    </section>
+                </div>
+            </nav>
+        </div>
+        -->
+
+    </div>
+
+</div>
+{% endblock %}

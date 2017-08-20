@@ -1,0 +1,4 @@
+/db/
+/symfony/var/
+/symfony/vendor/
+/symfony/web/bundles

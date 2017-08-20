@@ -1,0 +1,6 @@
+{% extends 'emails/layout.html.twig' %}
+
+{% block body %}
+    <p>Bonjour {{ contact.getName() }},</p>
+    {{ contact.getMessage() }}
+{% endblock %}

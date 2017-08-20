@@ -1,0 +1,84 @@
+{% extends 'blog.html.twig' %}
+
+{% block articles %}
+        {% if articles|length == 0 %}
+            <h3 class="text-center">Aucun articles</h3>
+        {% else %}
+
+            {% for article in articles %}
+                {% include 'article/article.html.twig' with {'article': article} %}
+            {% endfor %}
+
+            {% block pagination %}
+
+                {% if pagination.nbPages > 0 %}
+                    <nav aria-label="Page navigation" class="text-center">
+                        <ul class="pagination">
+                            {% if pagination.page > 1 %}
+                                <li>
+                                    <a href="{{ path(pagination.nomRoute, app.request.query.all|merge(pagination.paramsRoute|merge({'page': 1}))) }}">
+                                        <<
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path(pagination.nomRoute,
+                                    app.request.query.all|merge(pagination.paramsRoute|merge({'page': pagination.page-1}))) }}">
+                                        <
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                            {# Affichage de toutes les pages entre p-4 et p+4 sauf si < 1 ou > nbPages #}
+                            {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.nbPages)) %}
+                                <li {% if p == pagination.page %}class="active"{% endif %}>
+                                    <a href="{{ path(pagination.nomRoute, app.request.query.all|merge(pagination.paramsRoute|merge({'page': p}))) }}">
+                                        {{ p }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+
+                            {% if pagination.page < pagination.nbPages %}
+                                <li>
+                                    <a href="{{ path(pagination.nomRoute,
+                                    app.request.query.all|merge(pagination.paramsRoute|merge({'page': pagination.page+1}))) }}">
+                                        >
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path(pagination.nomRoute,
+                                    app.request.query.all|merge(pagination.paramsRoute|merge({'page': pagination.nbPages}))) }}">
+                                        >>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                {% endif %}
+
+
+                <!--
+            <nav aria-label="Page navigation" class="text-center">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            -->
+
+            {% endblock %}
+
+        {% endif %}
+{% endblock %}
