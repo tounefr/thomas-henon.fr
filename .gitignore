@@ -2,3 +2,5 @@
 /symfony/var/
 /symfony/vendor/
 /symfony/web/bundles
+/nginx/logs/*
+/symfony/bin/*

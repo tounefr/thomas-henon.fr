@@ -1,2 +1,0 @@
-2017/08/15 14:17:32 [emerg] 1#1: host not found in upstream "blog_php:9001" in /etc/nginx/conf.d/upstream.conf:1
-2017/08/15 14:18:05 [emerg] 1#1: host not found in upstream "blog_php:9001" in /etc/nginx/conf.d/upstream.conf:1
