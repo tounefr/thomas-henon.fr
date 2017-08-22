@@ -1,7 +1,7 @@
 FROM nginx:latest
 
 ADD nginx.conf /etc/nginx/
-ADD symfony.conf /etc/nginx/conf.d/
+ADD dev.conf /etc/nginx/conf.d/
 
 RUN rm /etc/nginx/conf.d/default.conf
 

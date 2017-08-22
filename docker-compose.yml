@@ -13,17 +13,17 @@ services:
     volumes:
       - ./db:/var/lib/mysql
   php:
-    build: ./php
+    build: ./
     volumes:
+      - /var/cache/apk/
       - ./symfony:/var/www/symfony
-      - ./symfony:/var/www/symfony/app/logs
   nginx:
     build: ./nginx
     ports:
       - 80:80
     volumes:
       - ./nginx/logs/nginx/:/var/log/nginx
-      - ./symfony:/var/www/symfony
-      - ./symfony:/var/www/symfony/app/logs 
+    volumes_from:
+      - php
     environment:
       - VIRTUAL_HOST=localhost

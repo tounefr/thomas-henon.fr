@@ -1,6 +1,7 @@
-/db/
-/symfony/var/
-/symfony/vendor/
-/symfony/web/bundles
-/nginx/logs/*
-/symfony/bin/*
+db/
+symfony/var/
+symfony/vendor/
+symfony/web/bundles/
+nginx/logs/
+symfony/bin/
+.idea/
