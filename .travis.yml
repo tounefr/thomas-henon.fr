@@ -4,20 +4,27 @@ services:
   - docker
 
 env:
-  - DOCKER_COMPOSE_VERSION=1.14.0
+  - REPO=toune/portfolio
 
 before_install:
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
+  - docker build -t portfolio_php ./
+  - docker build -t portfolio_nginx ./nginx
 
 script:
-  - docker-compose build --no-cache
-
-after_success:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-  - export REPO=toune/portfolio
+
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker tag `docker-compose images -q php` $REPO:$TAG
-  - docker push $REPO:$TAG
+
+  - docker tag portfolio_php $REPO:"app-$TAG"
+  - docker push $REPO:"app-$TAG"
+
+  - docker tag portfolio_nginx $REPO:"nginx-$TAG"
+  - docker push $REPO:"nginx-$TAG"
+
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      docker tag portfolio_php $REPO:app-${TRAVIS_COMMIT:0:6}
+      docker push $REPO:app-${TRAVIS_COMMIT:0:6}
+
+      docker tag portfolio_nginx $REPO:nginx-${TRAVIS_COMMIT:0:6}
+      docker push $REPO:nginx-${TRAVIS_COMMIT:0:6}
+    fi

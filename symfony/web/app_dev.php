@@ -29,6 +29,18 @@ if (PHP_VERSION_ID < 70000) {
     $kernel->loadClassCache();
 }
 $request = Request::createFromGlobals();
+
+if (!(\Symfony\Component\HttpFoundation\IpUtils::checkIp(
+    $request->getClientIp(), [
+        "172.16.0.0/12",
+        "192.168.0.0/24",
+        "10.0.0.0/8"
+    ]
+))) {
+    header('HTTP/1.0 403 Forbidden');
+    exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
+}
+
 $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);

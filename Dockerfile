@@ -1,6 +1,6 @@
 FROM alpine:3.4
 
-MAINTAINER Vincent Composieux <vincent.composieux@gmail.com>
+MAINTAINER Thomas Henon <contact@toune.fr>
 
 RUN apk add --update \
     php5-fpm \
@@ -25,12 +25,14 @@ RUN apk add --update \
     php5-phar \
     php5-sqlite3 \
     php5-pdo_sqlite \
+    php5-zip \
     curl \
-    git
+    git \
+    ca-certificates
 
 #RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
-RUN curl --insecure https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
+#RUN curl --insecure https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
 
 ADD php/symfony.ini /etc/php5/fpm/conf.d/
 ADD php/symfony.ini /etc/php5/cli/conf.d/
@@ -41,11 +43,22 @@ COPY symfony /var/www/symfony
 WORKDIR /var/www/symfony
 RUN cd /var/www/symfony
 
+# install composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php -r "if (hash_file('SHA384', 'composer-setup.php') === '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
+    php composer-setup.php && \
+    php -r "unlink('composer-setup.php');" && \
+    mv composer.phar /usr/local/bin/composer && \
+    chmod +x /usr/local/bin/composer
+
 RUN composer install
 
-RUN php bin/console doctrine:database:create
-RUN php bin/console doctrine:schema:create
-RUN php bin/console doctrine:fixtures:load -n
+RUN touch var/data/data.sqlite
+
+# install database dev env
+RUN php bin/console -e=dev doctrine:database:create
+RUN php bin/console -e=dev doctrine:schema:create
+RUN php bin/console -e=dev doctrine:fixtures:load -n
 
 # php permissions 
 RUN chown 65534:65534 -R /var/www/
@@ -53,6 +66,8 @@ RUN chmod 775 -R /var/www
 
 # nginx permissions
 RUN chmod 777 -R /var/www/symfony/web/
+
+RUN ./vendor/bin/simple-phpunit src/
 
 CMD ["php-fpm", "-F"]
 
