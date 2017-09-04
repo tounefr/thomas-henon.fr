@@ -15,7 +15,7 @@ services:
     build: ./
     volumes:
       - /var/cache/apk/
-      - ./symfony:/var/www/symfony
+      - /var/www/symfony
   nginx:
     build: ./nginx
     ports:

@@ -46,9 +46,13 @@ RUN composer install
 RUN php bin/console doctrine:database:create
 RUN php bin/console doctrine:schema:create
 RUN php bin/console doctrine:fixtures:load -n
- 
+
+# php permissions 
 RUN chown 65534:65534 -R /var/www/
 RUN chmod 775 -R /var/www
+
+# nginx permissions
+RUN chmod 777 -R /var/www/symfony/web/
 
 CMD ["php-fpm", "-F"]
 

@@ -1,0 +1,55 @@
+version: '2'
+
+networks:
+  default:
+    driver: bridge
+  webproxy:
+    external:
+      name: webproxy_blog
+
+services:
+    db:
+      image: mysql
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=symfony
+        - MYSQL_USER=symfony
+        - MYSQL_PASSWORD=symfony
+      volumes:
+        - /docker/blog/db:/var/lib/mysql
+      networks:
+        - default
+    php:
+      image: localhost:5000/blog_php
+      networks:
+        - default
+      volumes:
+        - /var/www/symfony
+        - /docker/blog/logs/symfony:/var/www/symfony/app/logs
+    nginx:
+      image: localhost:5000/blog_nginx
+      volumes:
+        - /docker/blog/logs/nginx/:/var/log/nginx
+        - /docker/blog/logs/symfony:/var/www/symfony/app/logs
+      volumes_from:
+        - php
+      networks:
+        - default
+        - webproxy
+      environment:
+        - VIRTUAL_HOST=www.toune.fr,www.thomas-henon.fr,toune.fr,thomas-henon.fr,dtvkvl6lucqyd3sf.onion
+    piwik:
+      image: piwik:fpm
+      networks:
+        - default
+      volumes:
+        - /docker/blog/piwik:/var/www/html
+    piwik_nginx:
+      image: localhost:5000/blog_piwik_nginx
+      environment:
+        - VIRTUAL_HOST=analytics.toune.fr
+      volumes:
+        - /docker/blog/piwik:/var/www/html
+      networks:
+        - webproxy
+        - default
