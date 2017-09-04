@@ -4,7 +4,7 @@ ADD nginx.conf /etc/nginx/
 ADD dev.conf /etc/nginx/conf.d/
 ADD prod.conf /etc/nginx/conf.d/
 
-RUN rm /etc/nginx/conf.d/default.conf
+RUN rm -f /etc/nginx/conf.d/default.conf
 
 RUN echo "upstream php-upstream { server php:9001; }" > /etc/nginx/conf.d/upstream.conf
 
