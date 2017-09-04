@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  db:
+    image: mysql
+    ports:
+      - 3306:3306
+    network_mode: host
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=symfony
+      - MYSQL_USER=symfony
+      - MYSQL_PASSWORD=symfony
+  php:
+    build: ./
+    volumes:
+      - /var/cache/apk/
+      - ./symfony:/var/www/symfony
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/logs/nginx/:/var/log/nginx
+    volumes_from:
+      - php
+    environment:
+      - VIRTUAL_HOST=localhost

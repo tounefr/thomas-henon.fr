@@ -27,48 +27,7 @@
 <div id="blog" class="container">
     <div class="row">
 
-        <div class="col-md-3">
-            <nav>
-                <div class="row">
-                    <section class="content row container">
-                        <h3 class="row">
-                            <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
-                            Categories
-                        </h3>
-                        <ul>
-                            {% for category in categories %}
-                            <li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> <a href="{{ path('article_index', {'category': category.getName() }) }}">{{ category.getName() }}</a> <!--<span class="badge">42</span>--></li>
-                            {% endfor %}
-                        </ul>
-                    </section>
-                </div>
-                <!--
-                <div class="row">
-                    <section class="content row container">
-                        <h3 class="row">
-                            <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
-                            Archives
-                        </h3>
-                        <ul>
-                            <li><a href="#">Catégorie</a></li>
-                            <li><a href="#">Catégorie</a></li>
-                            <li><a href="#">Catégorie</a></li>
-                        </ul>
-                    </section>
-                </div>
-                <div class="row">
-                    <section class="content row container">
-                        <h3 class="row">
-                            <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
-                            Pub
-                        </h3>
-                    </section>
-                </div>
-                -->
-            </nav>
-        </div>
-
-        <div class="col-md-6">
+        <div class="col-md-9">
         {% block flashes %}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
@@ -96,17 +55,38 @@
         {% endblock %}
         </div>
 
-        <!--
         <div class="col-md-3">
             <nav>
                 <div class="row">
                     <section class="content row container">
                         <h3 class="row">
                             <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
-                            Abonnez vous !
+                            Categories
+                        </h3>
+                        <ul>
+                            {% for category in categories %}
+                                <li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> <a href="{{ path('article_index', {'category': category.name }) }}">{{ category.name }}</a> <span class="badge">{{ category.articles|length }}</span> <!--<span class="badge">42</span>--></li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="content row container">
+                        <h3 class="row">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            Traduire
                         </h3>
                         <div id="rss_subscribe">
-                            <i class="fa fa-rss-square" aria-hidden="true"></i>
+                        </div>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="content row container">
+                        <h3 class="row">
+                            <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+                            Articles populaires
+                        </h3>
+                        <div id="rss_subscribe">
                         </div>
                     </section>
                 </div>
@@ -114,13 +94,14 @@
                     <section class="content row container">
                         <h3 class="row">
                             <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
-                            Pub
+                            Newsletter
                         </h3>
+                        <div id="rss_subscribe">
+                        </div>
                     </section>
                 </div>
             </nav>
         </div>
-        -->
 
     </div>
 

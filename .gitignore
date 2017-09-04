@@ -1,7 +1,7 @@
 db/
-symfony/var/
 symfony/vendor/
 symfony/web/bundles/
 nginx/logs/
 symfony/bin/
-.idea/
+.idea/  
+.web-server-pid

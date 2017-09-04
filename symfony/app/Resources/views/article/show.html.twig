@@ -6,60 +6,7 @@
 {% block articles %}
     {% include 'article/article.html.twig' with {'article': article} %}
 
-    {% block comments %}
-
-        <div id="article_comments">
-            <div class="row">
-                <div class="col-md-8 col-md-push-4">
-
-                    <section class="content row container">
-                        <div class="row">
-                            {% if article.comments|length > 0 %}
-                                <h4 class="text-center">Réagissez à cet article en postant un commentaire</h4>
-                            {% else %}
-                                <h4 class="text-center">Soyez le premier à rédiger un commentaire !</h4>
-                            {% endif %}
-                            {{ form_start(new_comment_form) }}
-                            {{ form_widget(new_comment_form) }}
-                            <button type="submit" name="form-submit" class="btn btn-default"><span class="glyphicon glyphicon-send" aria-hidden="true">  Valider</button>
-                            {{ form_end(new_comment_form) }}
-                        </div>
-                    </section>
-
-                    {% for comment in article.comments|sort|reverse %}
-                        {% if comment.getIsApproved() %}
-                            <section id="comment{{ comment.id }}" class="content row container">
-                                <div class="row">
-                                    <div class="comment_head"><h4 class="">{{ comment.getPseudo() }}</h4><time><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{ comment.date|date('Y-m-d H:i:s') }}</time></div>
-                                    <p>{{ comment.getComment() }}</p>
-                                </div>
-                            </section>
-                        {% endif %}
-                    {% endfor %}
-
-
-                </div>
-            </div>
-        </div>
-
-        <!--
-        <div id="disqus_thread"></div>
-        <script>
-
-            var disqus_config = function () {
-                this.page.url = 'http://localhost/';  // Replace PAGE_URL with your page's canonical URL variable
-                this.page.identifier = 1; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            };
-            (function() { // DON'T EDIT BELOW THIS LINE
-                var d = document, s = d.createElement('script');
-                s.src = 'https://blog-toune.disqus.com/embed.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        -->
-    {% endblock %}
+    {% include 'article/comment/show.html.twig' with {'comments': article.comments} %}
 
 {% endblock %}
 

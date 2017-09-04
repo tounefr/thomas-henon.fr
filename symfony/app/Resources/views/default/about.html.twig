@@ -4,58 +4,76 @@
 
 {% block body %}
     <div id="about">
-        <section class="content row container">
-            <article>
-                <h2 class="row">
-                    <span class="glyphicon glyphicon-console" aria-hidden="true"></span> A propos
-                </h2>
 
-                <h3 class="text-center">Hello</h3>
-                <p class="row article_content text-center">
-                    Je suis <strong>Thomas HENON</strong> alias <strong>Toune</strong>,<br />développeur et administrateur système vivant en France sur Strasbourg.<br />
-                    J'aime la sécurité informatique, administrer des serveurs, le développement.<br />
-                    Sur ce blog, je partage diverses astuces et bouts de code qui peuvent sans doutes vous être utile.<br/>
-                </p>
-                <p class="text-center" style="display: none;">
-                    <i class="fa fa-beer" aria-hidden="true"></i><br />
-                    Si je vous ai rendu service par l'intermédiaire de ce blog, vous pouvez toujours me remercier en me payant une bière:<br />
-                    <a class="btn_donation" href="https://blockchain.info/address/17pVm7TyRcPyNnQUr4iAWaZbvisPtSJgKW" target="_blank"><i class="fa fa-btc" aria-hidden="true"></i> Faire un don: 17pVm7TyRcPyNnQUr4iAWaZbvisPtSJgKW</a>
-                </p>
-            </article>
-        </section>
+        <div class="row">
+            <section class="content container">
+                <article>
+                    <h2 class="row">
+                        <span class="glyphicon glyphicon-console" aria-hidden="true"></span> A propos
+                    </h2>
 
-        <section class="content row container">
-            <article>
-                <h2 class="row">
-                    <span class="glyphicon glyphicon-console" aria-hidden="true"></span> Réseaux sociaux
-                </h2>
-                <p class="article_content text-center">
-                    <p class="text-left">Vous pouvez me suivre sur les réseaux sociaux</p>
-                    <div id="social_networks" class="row">
-                        <ul class="col-md-12">
-                            <a href="https://fr.linkedin.com/in/thomas-henon-773b94b3" target="_blank"><li><i class="fa fa-linkedin" aria-hidden="true"></i> LinkedIn</li></a>
-                            <a href="#"><li><i class="fa fa-telegram" aria-hidden="true"></i> Télégram</li></a>
-                            <a href="https://github.com/tounefr" target="_blank"><li><i class="fa fa-github" aria-hidden="true"></i> Github</li></a>
-                            <a href="https://twitter.com/tounefr" target="_blank"><li><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</li></a>
-                            <a href="https://hostux.social/@tounefr" target="_blank"><li><i class="fa fa-share-square-o" aria-hidden="true"></i> Mastodon</li></a>
-                        </ul>
-                        <ul class="col-md-12">
-                            <a target="_blank" href="https://keybase.io/tounefr/pgp_keys.asc?fingerprint=b58c5f336ef2ce39af107b2e927c823f25b3b8f8"><li><i class="fa fa-key" aria-hidden="true"></i> Clé PGP</li></a>
-                            <a href="mailto:contact@toune.fr"><li><i class="fa fa-envelope" aria-hidden="true"></i> Email</li></a>
-                        </ul>
-                        <!--
-                        <ul>
+                    <h3 class="text-center">Hello</h3>
+                    <p class="row article_content text-center">
+                        Je suis <strong>Thomas HENON</strong> alias <strong>Toune</strong>,<br />développeur et administrateur système vivant en France sur Strasbourg.<br />
+                        J'aime la sécurité informatique, administrer des serveurs, le développement.<br />
+                        Sur ce blog, je partage diverses astuces et bouts de code qui peuvent sans doutes vous être utile.<br/>
+                    </p>
+                    <p class="text-center" style="display: none;">
+                        <i class="fa fa-beer" aria-hidden="true"></i><br />
+                        Si je vous ai rendu service par l'intermédiaire de ce blog, vous pouvez toujours me remercier en me payant une bière:<br />
+                        <a class="btn_donation" href="https://blockchain.info/address/17pVm7TyRcPyNnQUr4iAWaZbvisPtSJgKW" target="_blank"><i class="fa fa-btc" aria-hidden="true"></i> Faire un don: 17pVm7TyRcPyNnQUr4iAWaZbvisPtSJgKW</a>
+                    </p>
+                </article>
+            </section>
+        </div>
 
-                            <li class="col-md-6">
-                            <a href="http://47nw2dfajqjvn3dw.onion" target="_blank"><li><img src="/bundles/app/images/tor.png" width="15" height="15" /> Accès Tor: 47nw2dfajqjvn3dw.onion</li></a>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <section id="social_networks" class="content container">
+                    <article>
+                        <h2 class="row">
+                            <span class="glyphicon glyphicon-console" aria-hidden="true"></span> Réseaux sociaux
+                        </h2>
+                        <div class="article_content">
+                            <div id="social_networks" class="row">
+                                <ul class="col-xs-6">
+                                    <a href="https://fr.linkedin.com/in/thomas-henon-773b94b3" target="_blank"><li><i class="fa fa-linkedin" aria-hidden="true"></i> LinkedIn</li></a>
+                                    <a href="#"><li><i class="fa fa-telegram" aria-hidden="true"></i> Télégram</li></a>
+                                    <a href="https://github.com/tounefr" target="_blank"><li><i class="fa fa-github" aria-hidden="true"></i> Github</li></a>
+                                    <a href="https://twitter.com/tounefr" target="_blank"><li><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</li></a>
+                                </ul>
+                                <ul class="col-xs-6">
+                                    <a href="https://hostux.social/@tounefr" target="_blank"><li><i class="fa fa-share-square-o" aria-hidden="true"></i> Mastodon</li></a>
+                                    <a target="_blank" href="https://keybase.io/tounefr/pgp_keys.asc?fingerprint=b58c5f336ef2ce39af107b2e927c823f25b3b8f8"><li><i class="fa fa-key" aria-hidden="true"></i> Clé PGP</li></a>
+                                    <a href="mailto:contact@toune.fr"><li><i class="fa fa-rss" aria-hidden="true"></i> Flux RSS</li></a>
+                                    <a href="mailto:contact@toune.fr"><li><i class="fa fa-envelope" aria-hidden="true"></i> Email</li></a>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <section id="last_articles" class="content container">
+                    <article>
+                        <h2 class="row">
+                            <span class="glyphicon glyphicon-console" aria-hidden="true"></span> Derniers articles
+                        </h2>
+                        <div>
+                            <ul>
+                                {%  for article in lastArticles %}
+                                    <li class="row">
+                                        <div class="col-md-10 col-xs-12"><a href="{{ path('article_show', { 'id': article.id, 'slug': article.slug }) }}">{{ article.title }}</a></div>
+                                        <div class="col-md-2 col-xs-12"><time>{{  article.date|date('d/m/Y') }}</time></div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </div>
 
-                            </li>
-                        </ul>
-                        -->
-                    </div>
-                </p>
-            </article>
-        </section>
     </div>
 
 {% endblock %}

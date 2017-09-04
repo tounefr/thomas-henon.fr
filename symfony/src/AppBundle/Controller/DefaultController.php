@@ -23,6 +23,16 @@ class DefaultController extends Controller
      */
     public function aboutAction(Request $request)
     {
-        return $this->render('default/about.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $article_repo = $em->getRepository('AppBundle:Article');
+        $articles = $article_repo->getFilterArticle(
+            $category = null,
+            $page = 1,
+            $nbArticlesParPage = 5
+        );
+
+        return $this->render('default/about.html.twig', array(
+            'lastArticles' => $articles
+        ));
     }
 }

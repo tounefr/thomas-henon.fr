@@ -25,7 +25,8 @@ RUN apk add --update \
     php5-phar \
     php5-sqlite3 \
     php5-pdo_sqlite \
-    curl
+    curl \
+    git
 
 #RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
@@ -36,19 +37,18 @@ ADD php/symfony.ini /etc/php5/cli/conf.d/
 ADD php/symfony.pool.conf /etc/php5/fpm.d/
 
 COPY symfony /var/www/symfony
-RUN rm /var/www/symfony/var/data/data.sqlite
 
 WORKDIR /var/www/symfony
 RUN cd /var/www/symfony
 
-RUN composer install --dev
+RUN composer install
 
 RUN php bin/console doctrine:database:create
 RUN php bin/console doctrine:schema:create
 RUN php bin/console doctrine:fixtures:load -n
  
-RUN chown 65534:65534 -R *
-RUN chmod 755 -R *
+RUN chown 65534:65534 -R /var/www/
+RUN chmod 775 -R /var/www
 
 CMD ["php-fpm", "-F"]
 
