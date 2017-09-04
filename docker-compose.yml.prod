@@ -20,14 +20,14 @@ services:
       networks:
         - default
     php:
-      image: localhost:5000/blog_php
+      build: ./
       networks:
         - default
       volumes:
         - /var/www/symfony
         - /docker/blog/logs/symfony:/var/www/symfony/app/logs
     nginx:
-      image: localhost:5000/blog_nginx
+      build: ./nginx
       volumes:
         - /docker/blog/logs/nginx/:/var/log/nginx
         - /docker/blog/logs/symfony:/var/www/symfony/app/logs
