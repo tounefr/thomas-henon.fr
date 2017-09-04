@@ -1,4 +1,5 @@
 db/
+symfony/var/cache/
 symfony/vendor/
 symfony/web/bundles/
 nginx/logs/
