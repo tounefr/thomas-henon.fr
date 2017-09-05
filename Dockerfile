@@ -65,12 +65,6 @@ RUN chmod 775 -R /var/www
 # nginx permissions
 RUN chmod 777 -R /var/www/symfony/web/
 
-# unit tests
-RUN curl --insecure https://phar.phpunit.de/phpunit-6.3.0.phar -o /usr/local/bin/phpunit && \
-    chmod +x /usr/local/bin/phpunit && \
-    echo "b6f83f6430ffba4aad1945b393bb83969e62442b02d833007aac7be2439068a4 /usr/local/bin/phpunit" | sha256sum -c && \
-    exit 1
-
 #RUN phpunit src/AppBundle/Tests
 
 CMD ["php-fpm", "-F"]
