@@ -1,8 +1,6 @@
 db/
-symfony/var/cache/
 symfony/vendor/
 symfony/web/bundles/
-symfony/var/
 nginx/logs/
 symfony/bin/
 symfony/core
