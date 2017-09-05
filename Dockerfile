@@ -1,6 +1,6 @@
 FROM alpine:3.4
 
-MAINTAINER Vincent Composieux <vincent.composieux@gmail.com>
+MAINTAINER Thomas Henon <contact@toune.fr>
 
 RUN apk add --update \
     php5-fpm \
@@ -43,9 +43,12 @@ RUN cd /var/www/symfony
 
 RUN composer install
 
-RUN php bin/console doctrine:database:create
-RUN php bin/console doctrine:schema:create
-RUN php bin/console doctrine:fixtures:load -n
+RUN rm -f /var/www/symfony/var/data/data.sqlite
+
+# install database dev env
+RUN php bin/console -e=dev doctrine:database:create
+RUN php bin/console -e=dev doctrine:schema:create
+RUN php bin/console -e=dev doctrine:fixtures:load -n
 
 # php permissions 
 RUN chown 65534:65534 -R /var/www/
