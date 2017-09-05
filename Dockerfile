@@ -57,6 +57,10 @@ RUN chmod 775 -R /var/www
 # nginx permissions
 RUN chmod 777 -R /var/www/symfony/web/
 
+# unit tests
+RUN wget https://phar.phpunit.de/phpunit.phar && chmod +x phpunit.phar && mv phpunit.phar /usr/local/bin/phpunit
+RUN phpunit src/AppBundle
+
 CMD ["php-fpm", "-F"]
 
 EXPOSE 9000
