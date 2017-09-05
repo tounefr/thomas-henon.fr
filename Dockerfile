@@ -43,8 +43,6 @@ RUN cd /var/www/symfony
 
 RUN composer install
 
-RUN rm -f /var/www/symfony/var/data/data.sqlite
-
 # install database dev env
 RUN php bin/console -e=dev doctrine:database:create
 RUN php bin/console -e=dev doctrine:schema:create
