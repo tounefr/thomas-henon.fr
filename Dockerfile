@@ -65,7 +65,7 @@ RUN chmod 775 -R /var/www
 # nginx permissions
 RUN chmod 777 -R /var/www/symfony/web/
 
-#RUN phpunit src/AppBundle/Tests
+RUN phpunit src/AppBundle/Tests
 
 CMD ["php-fpm", "-F"]
 
