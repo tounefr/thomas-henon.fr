@@ -6,6 +6,7 @@ services:
 env:
   - DOCKER_COMPOSE_VERSION=1.14.0
   - REPO=toune/portfolio
+  - ENV=dev
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose
@@ -14,7 +15,7 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
-  - docker-compose build -t portfolio .
+  - docker-compose -f docker-compose.yml.${ENV} build -t portfolio .
 
 after_success:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
