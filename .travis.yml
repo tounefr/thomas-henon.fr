@@ -15,8 +15,8 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
-  - docker-compose -f docker-compose.yml.${ENV} build -t portfolio .
-
+  - docker build -t portfolio .
+  
 after_success:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
