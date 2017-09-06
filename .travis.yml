@@ -19,7 +19,7 @@ install:
 
 # TODO: simple test to check nginx <--> symfony reverse proxy
 
-deploy:
+after_install:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - export PHPIMG_COMMIT_HASH=`docker-compose images -q php`
 
