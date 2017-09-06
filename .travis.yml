@@ -6,6 +6,7 @@ services:
 env:
   - DOCKER_COMPOSE_VERSION=1.14.0
   - REPO=toune/portfolio
+  - ENV=dev
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose
@@ -13,15 +14,18 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
-script:
-  - docker build -t portfolio .
-  
-after_success:
+install:
+  - docker-compose up -d --force-recreate
+
+# TODO: simple test to check nginx <--> symfony reverse proxy
+
+deploy:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  - export PHPIMG_COMMIT_HASH=`docker-compose images -q php`
 
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker tag portfolio $REPO:$TAG
+  - docker tag ${PHPIMG_COMMIT_HASH:0:11} $REPO:$TAG
   - docker push $REPO:$TAG
 
-  - docker tag portfolio $REPO:$TRAVIS_COMMIT
+  - docker tag ${PHPIMG_COMMIT_HASH:0:11} $REPO:$TRAVIS_COMMIT
   - docker push $REPO:$TRAVIS_COMMIT

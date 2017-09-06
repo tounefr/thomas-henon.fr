@@ -39,6 +39,12 @@ services:
       public: true
       arguments: ["@doctrine.orm.entity_manager"]
 
+    appbundle.http_debug_headers:
+      class: AppBundle\EventListener\HttpDebugHeadersListener
+      arguments: ["%kernel.environment%"]
+      tags:
+        - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:

@@ -27,7 +27,8 @@ RUN apk add --update \
     php5-pdo_sqlite \
     php5-zip \
     curl \
-    git
+    git \
+    ca-certificates
 
 #RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
@@ -66,7 +67,7 @@ RUN chmod 775 -R /var/www
 # nginx permissions
 RUN chmod 777 -R /var/www/symfony/web/
 
-RUN ./vendor/bin/simple-phpunit -c app/
+RUN ./vendor/bin/simple-phpunit src/
 
 CMD ["php-fpm", "-F"]
 
