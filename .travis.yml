@@ -22,9 +22,8 @@ script:
   - docker push $REPO:"nginx-$TAG"
 
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      docker tag portfolio_php $REPO:app-${TRAVIS_COMMIT:0:6}
-      docker push $REPO:app-${TRAVIS_COMMIT:0:6}
-
-      docker tag portfolio_nginx $REPO:nginx-${TRAVIS_COMMIT:0:6}
-      docker push $REPO:nginx-${TRAVIS_COMMIT:0:6}
+    docker tag portfolio_php $REPO:"app-${TRAVIS_COMMIT:0:6}";
+    docker push $REPO:app-"${TRAVIS_COMMIT:0:6}";
+    docker tag portfolio_nginx $REPO:"nginx-${TRAVIS_COMMIT:0:6}";
+    docker push $REPO:nginx-"${TRAVIS_COMMIT:0:6}";
     fi
