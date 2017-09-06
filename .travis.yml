@@ -14,8 +14,8 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
-install:
-  - docker-compose up -d --force-recreate
+script:
+  - /usr/local/bin/docker-compose up -d --force-recreate
 
 # TODO: simple test to check nginx <--> symfony reverse proxy
 
