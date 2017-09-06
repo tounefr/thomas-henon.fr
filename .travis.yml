@@ -9,19 +9,21 @@ env:
   - ENV=dev
 
 before_install:
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-  - sudo /usr/local/bin/docker-compose up -d --force-recreate
+  - docker build -t portfolio_php ./
+  - docker build -t portfolio_nginx ./nginx
 
 after_install:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-  - export PHPIMG_COMMIT_HASH=`docker-compose images -q php`
 
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker tag ${PHPIMG_COMMIT_HASH:0:11} $REPO:$TAG
-  - docker push $REPO:$TAG
 
-  - docker tag ${PHPIMG_COMMIT_HASH:0:11} $REPO:$TRAVIS_COMMIT
-  - docker push $REPO:$TRAVIS_COMMIT
+  - docker tag portfolio_php $REPO:"app-$TAG"
+  - docker push $REPO:"app-$TAG"
+
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      - docker tag portfolio_php $REPO:$TRAVIS_COMMIT
+      - docker push $REPO:$TRAVIS_COMMIT
+    fi
+
+  - docker tag portfolio_nginx $REPO:"nginx-$TAG"
+  - docker push $REPO:"nginx-$TAG"
