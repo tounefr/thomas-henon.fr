@@ -4,15 +4,13 @@ services:
   - docker
 
 env:
-  - DOCKER_COMPOSE_VERSION=1.14.0
   - REPO=toune/portfolio
-  - ENV=dev
 
 before_install:
   - docker build -t portfolio_php ./
   - docker build -t portfolio_nginx ./nginx
 
-after_install:
+script:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
@@ -21,8 +19,8 @@ after_install:
   - docker push $REPO:"app-$TAG"
 
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      - docker tag portfolio_php $REPO:$TRAVIS_COMMIT
-      - docker push $REPO:$TRAVIS_COMMIT
+      docker tag portfolio_php $REPO:$TRAVIS_COMMIT
+      docker push $REPO:$TRAVIS_COMMIT
     fi
 
   - docker tag portfolio_nginx $REPO:"nginx-$TAG"
