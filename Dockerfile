@@ -25,6 +25,7 @@ RUN apk add --update \
     php5-phar \
     php5-sqlite3 \
     php5-pdo_sqlite \
+    php5-zip \
     curl \
     git
 
@@ -65,7 +66,7 @@ RUN chmod 775 -R /var/www
 # nginx permissions
 RUN chmod 777 -R /var/www/symfony/web/
 
-RUN phpunit src/AppBundle/Tests
+RUN ./vendor/bin/simple-phpunit -c app/
 
 CMD ["php-fpm", "-F"]
 
