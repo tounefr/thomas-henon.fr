@@ -6,3 +6,4 @@ symfony/bin/
 symfony/core
 .idea/  
 .web-server-pid
+symfony/var/data/data.sqlite

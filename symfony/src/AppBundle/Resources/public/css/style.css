@@ -47,6 +47,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    word-break: break-all;
 }
 
 ::-webkit-scrollbar {
@@ -749,4 +750,14 @@ section.container {
 #about #last_articles ul li {
     padding: 0.1em;
     font-size: 16px;
+}
+
+#about #last_articles {
+    word-break: break-all;
+}
+
+@media (max-width: 400px) {
+    #blog nav h3 {
+        font-size: 18px;
+    }
 }

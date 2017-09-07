@@ -60,6 +60,22 @@
                 <div class="row">
                     <section class="content row container">
                         <h3 class="row">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            Rechercher
+                        </h3>
+                        <div>
+                            <form action="{{ path('article_index') }}" class="form-inline">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="query" value="{{ app.request.get('query') }}"/>
+                                </div>
+                                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="content row container">
+                        <h3 class="row">
                             <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
                             Categories
                         </h3>
@@ -68,16 +84,6 @@
                                 <li><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> <a href="{{ path('article_index', {'category': category.name }) }}">{{ category.name }}</a> <span class="badge">{{ category.articles|length }}</span> <!--<span class="badge">42</span>--></li>
                             {% endfor %}
                         </ul>
-                    </section>
-                </div>
-                <div class="row">
-                    <section class="content row container">
-                        <h3 class="row">
-                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                            Traduire
-                        </h3>
-                        <div id="rss_subscribe">
-                        </div>
                     </section>
                 </div>
                 <div class="row">

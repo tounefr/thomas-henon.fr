@@ -23,9 +23,11 @@ use Suin\RSSWriter\Item;
  */
 class ArticleController extends Controller
 {
+
     /**
      * Lists all article entities.
      *
+     * @Route("/")
      * @Route("/articles/{page}",
      *     requirements={"page" = "\d+"},
      *     name="article_index")
@@ -40,9 +42,10 @@ class ArticleController extends Controller
 
         $article_repo = $em->getRepository('AppBundle:Article');
 
-        $nbArticlesParPage = 2;
+        $nbArticlesParPage = 4;
         $articles = $article_repo->getFilterArticle(
             $category,
+            $request->query->get('query'),
             $page,
             $nbArticlesParPage
         );
@@ -72,7 +75,7 @@ class ArticleController extends Controller
 
         $channel = new Channel();
         $channel
-            ->title('RSS Blog thomas-henon.fr')
+            ->title('Blog thomas-henon.fr')
             ->description('Diverses astuces et bouts de code autour du développement et l\'administration système')
             ->url($request->getSchemeAndHttpHost())
             ->feedUrl($request->getUri())

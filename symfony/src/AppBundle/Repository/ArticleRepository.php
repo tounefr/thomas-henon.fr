@@ -21,7 +21,7 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getFilterArticle($categoryName = null, $page = 1, $result_per_page = 5)
+    public function getFilterArticle($categoryName = null, $query = null, $page = 1, $result_per_page = 5)
     {
         if (!is_numeric($page) || $page < 1)
             throw new \InvalidArgumentException('Wrong page paramter');
@@ -33,6 +33,11 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
                         ->innerJoin('a.category', 'c');
         if ($categoryName)
             $qb->where('c.name = :name')->setParameter('name', $categoryName);
+        if ($query) {
+            $qb->where('a.title LIKE :query');
+            $qb->orWhere('a.content LIKE :query');
+            $qb->setParameter('query', '%'.$query.'%');
+        }
 
         $query = $qb->getQuery()
                     ->setFirstResult($page - 1)

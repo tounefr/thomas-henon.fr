@@ -27,6 +27,7 @@ class DefaultController extends Controller
         $article_repo = $em->getRepository('AppBundle:Article');
         $articles = $article_repo->getFilterArticle(
             $category = null,
+            null,
             $page = 1,
             $nbArticlesParPage = 5
         );
