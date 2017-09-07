@@ -20,14 +20,14 @@ services:
       networks:
         - default
     php:
-      build: ./
+      image: toune/portfolio:app-latest
       networks:
         - default
       volumes:
         - /var/www/symfony
         - /docker/blog/logs/symfony:/var/www/symfony/app/logs
     nginx:
-      build: ./nginx
+      image: toune/portfolio:nginx-latest
       volumes:
         - /docker/blog/logs/nginx/:/var/log/nginx
         - /docker/blog/logs/symfony:/var/www/symfony/app/logs
