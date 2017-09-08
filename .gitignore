@@ -12,5 +12,6 @@ yarn-error.log
 yarn.lock
 var/bootstrap.php.cache
 composer.lock
-supervisord.*
+supervisord.log
+supervisord.pid
 web/front/assets/js/assets.js
