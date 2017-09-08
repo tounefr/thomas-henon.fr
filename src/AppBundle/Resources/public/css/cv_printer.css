@@ -1,0 +1,125 @@
+/*
+body {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+ h1, h2 h3 {
+    font-weight: bold;
+ }
+
+#cv {
+    font-size: 10px;
+}
+
+#cv h2 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#cv .cv_my_name {
+    font-size: 20px;
+}
+
+#cv .cv_pres_left ul, #cv_formations ul li {
+    margin: 0;
+    padding: 0;
+}
+
+#cv .cv_pres_left ul li {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-size: 14px;
+}
+
+#cv .professionnal_status, #cv .cv_print {
+    display: none;
+}
+
+#cv .cv_print {
+    float: right;
+}
+
+#cv .img_profil {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 10px;
+}
+
+#cv .cv_pres_left {
+    float: left;
+}
+
+#cv section {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+#cv #cv_skills h3 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#cv #cv_skills .col-md-6 {
+    width: 320px;
+    float: left;
+}
+
+#cv .cv_skills_container h3 {
+    margin-top: 10px;
+}
+
+#cv .cv_skills_container ul li, #cv_experiences ul li, #cv_hobbies ul li, #cv_formations ul li {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-size: 10px;
+    line-height: 16px;
+}
+
+#cv #cv_formations ul, #cv #cv_experiences ul {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+#cv #cv_formations, #cv #cv_experiences {
+  font-size: 10px;
+  line-height: 12px;
+}
+
+#cv #cv_formations h3, #cv #cv_experiences h3 {
+  float: left;
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 14px;
+}
+
+#cv #cv_formations .date, #cv #cv_experiences .date {
+  float: right;
+}
+
+#cv #cv_formations ul li, #cv #cv_experiences ul li {
+    border-bottom: 1px solid #D8D8D8;
+}
+
+footer {
+  display: none;
+}
+*/
+
+.print_link, .alert, footer {
+    display: none;
+}
+
+#img_profil img {
+    border-radius: 0;
+    border: 1px solid grey;
+}
+
+#cv_experiences > ul > li, #cv_formations > ul > li {
+    border-bottom: 1px solid #000000;
+}
+
+*, :after, :before {
+    color: #282828!important;
+}

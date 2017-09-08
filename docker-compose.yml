@@ -1,1 +1,24 @@
-docker-compose.yml.dev
+version: '2'
+
+services:
+  db:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=symfony
+      - MYSQL_USER=symfony
+      - MYSQL_PASSWORD=symfony
+  app:
+    build:
+        context: docker/dev
+    depends_on:
+      - db
+    ports:
+      - 80:80
+    volumes:
+        - ~/.composer:/root/.composer
+        - ./:/app
+    environment:
+      - VIRTUAL_HOST=localhost

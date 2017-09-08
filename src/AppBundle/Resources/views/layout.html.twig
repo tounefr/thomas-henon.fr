@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block page_title %}{% endblock %}</title>
+    <meta name="author" content="Thomas HENON" />
+    <meta name="keywords" content="développeur web administrateur système symfony 2 epitech thomas henon recherche stage" />
+    <meta name="google-site-verification" content="Qv8rHvbJZF2_H5G26sujceQy-VJhcEXMrxBVmLXnOz4" />
+    <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.ico') }}" />
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/global.css') }}" />
+    <link rel="alternate" type="application/rss+xml" href="{{ path('article_rss') }}" title="Blog thomas-henon.fr">
+    {% endblock %}
+</head>
+
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('about') }}">thomas@henon:~/</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ path('about') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"> A propos</a></li>
+                <li><a href="{{ path('article_index') }}"><span class="glyphicon glyphicon-comment" aria-hidden="true"> Blog</a></li>
+                <!--<li><a href="{{ path('about') }}"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"> Projets</a></li>-->
+                <li><a href="{{ path('cv') }}"><span class="glyphicon glyphicon-tag" aria-hidden="true"> CV</a></li>
+                <li><a href="{{ path('contact') }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right hidden-xs">
+                <li>
+                    <a href="https://twitter.com/tounefr" target="_blank">
+                        <img src="{{ asset('build/images/twitter.png') }}" alt="Twitter logo" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/tounefr" target="_blank">
+                        <img src="{{ asset('build/images/github.png') }}" alt="Github logo" />
+                    </a>
+                </li>
+                <li>
+                    <a type="application/rss+xml" href="{{ path('article_rss') }}" target="_blank">
+                        <img src="{{ asset('build/images/rss.png') }}" alt="RSS logo" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://fr.linkedin.com/in/thomas-henon-773b94b3" target="_blank">
+                        <img src="{{ asset('build/images/linkedin.png') }}" alt="Linkedin logo" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<noscript><p style="text-align: center">Veuillez activer JavaScript !</p></noscript>
+
+<div id="content">
+{% block flashes %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+
+            <div class="alert alert-{{ label }}" role="alert">
+                <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+                <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+
+{% block body %}
+{% endblock %}
+
+</div>
+
+<footer style="display: none">
+    <ul>
+        <li><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><i class="fa fa-copyright" aria-hidden="true"></i> Site sous Licence CC-NA</a></li>
+        <li><a href="http://dtvkvl6lucqyd3sf.onion" target="_blank"><img src="{{ asset('build/images/tor.png') }}" width="15" height="15" /> Accès Tor: dtvkvl6lucqyd3sf.onion</a></li>
+    </ul>
+</footer>
+
+{% block javascripts %}
+    <script src="{{ asset('build/app.js') }}"> </script>
+    <noscript><p><img src="//analytics.toune.fr/piwik.php?idsite=1&rec=1" style="border:0;" alt="" /></p></noscript>
+{% endblock %}
+
+</body>
+</html>

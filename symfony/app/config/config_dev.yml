@@ -1,7 +1,0 @@
-imports:
-    - { resource: config.yml }
-
-doctrine:
-    dbal:
-        driver: pdo_sqlite
-        path: '%database_path%'
