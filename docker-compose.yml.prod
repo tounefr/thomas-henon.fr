@@ -9,7 +9,7 @@ networks:
 
 services:
     db:
-      image: mysql
+      image: mysql:5.7
       environment:
         - MYSQL_ROOT_PASSWORD=root
         - MYSQL_DATABASE=symfony
@@ -24,13 +24,13 @@ services:
       networks:
         - default
       volumes:
-        - /var/www/symfony
-        - /docker/blog/logs/symfony:/var/www/symfony/app/logs
+        - /app
+        - /docker/blog/logs/symfony:/app/logs
     nginx:
       image: toune/portfolio:nginx-latest
       volumes:
         - /docker/blog/logs/nginx/:/var/log/nginx
-        - /docker/blog/logs/symfony:/var/www/symfony/app/logs
+        - /docker/blog/logs/symfony:/app/logs
       volumes_from:
         - php
       networks:

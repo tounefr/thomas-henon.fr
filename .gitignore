@@ -13,3 +13,4 @@ yarn.lock
 var/bootstrap.php.cache
 composer.lock
 supervisord.*
+web/front/assets/js/assets.js
