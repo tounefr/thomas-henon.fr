@@ -5,10 +5,11 @@ services:
 
 env:
   - REPO=toune/portfolio
+  - ENV=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "prod"; else echo "dev" ; fi`
 
 before_install:
-  - docker build -t portfolio_php ./
-  - docker build -t portfolio_nginx ./nginx
+  - docker build -f docker/${ENV} -t portfolio_php ./
+  - docker build -f docker/${ENV} -t portfolio_nginx ./nginx
 
 script:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
