@@ -8,7 +8,7 @@ env:
 
 before_install:
   - export ENV=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "prod"; else echo "dev" ; fi`
-  - docker build -f docker/Dockerfile.${ENV} -t portfolio_php ./
+  - docker build -f Dockerfile.${ENV} -t portfolio_php ./
 
 script:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
