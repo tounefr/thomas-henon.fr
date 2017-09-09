@@ -19,20 +19,11 @@ services:
         - /docker/blog/db:/var/lib/mysql
       networks:
         - default
-    php:
+    app:
       image: toune/portfolio:app-latest
-      networks:
-        - default
-      volumes:
-        - /app
-        - /docker/blog/logs/symfony:/app/logs
-    nginx:
-      image: toune/portfolio:nginx-latest
       volumes:
         - /docker/blog/logs/nginx/:/var/log/nginx
         - /docker/blog/logs/symfony:/app/logs
-      volumes_from:
-        - php
       networks:
         - default
         - webproxy

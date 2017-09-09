@@ -12,13 +12,13 @@ services:
       - MYSQL_PASSWORD=symfony
   app:
     build:
-        context: docker/dev
+        context: .
+        dockerfile: Dockerfile.dev
     depends_on:
       - db
     ports:
       - 80:80
     volumes:
         - ~/.composer:/root/.composer
-        - ./:/app
     environment:
       - VIRTUAL_HOST=localhost
