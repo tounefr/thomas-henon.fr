@@ -9,8 +9,6 @@ ENV LANG="en_US.UTF-8" \
     NODE_VERSION=6.9.4 \
     COMPOSER_ALLOW_SUPERUSER=1
 
-COPY ./ /app
-
 EXPOSE 80
 WORKDIR /app
 
@@ -66,6 +64,8 @@ RUN apt-get update -q && \
     rm -f /tmp/nodejs.tar.gz && \
     npm install yarn -g && \
     mkdir /run/php
+
+COPY ./ /app
 
 COPY docker/prod/php.ini /etc/php/7.1/cli/conf.d/50-setting.ini
 COPY docker/prod/pool.conf /etc/php/7.1/fpm/pool.d/www.conf
