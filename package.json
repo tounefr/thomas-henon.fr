@@ -28,13 +28,11 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^6.9.0",
     "eslint-watch": "^2.1.14",
-    "extract-text-webpack-plugin": "^2.0.0-beta.5",
     "file-loader": "^0.9.0",
     "font-awesome": "^4.7.0",
     "js-base64": "^2.1.9",
     "js-cookie": "^2.1.0",
     "mocha": "^3.1.2",
-    "mocha-webpack": "^0.7.0",
     "node-sass": "^3.11.2",
     "npm-run-all": "^3.1.2",
     "raven-js": "^3.8.0",
@@ -47,7 +45,6 @@
     "sass-loader": "^4.0.0",
     "stackblur-canvas": "^1.4.0",
     "style-loader": "^0.13.1",
-    "webpack": "^3.3.0"
   },
   "devDependencies": {
     "@symfony/webpack-encore": "^0.14.0",
