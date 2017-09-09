@@ -6,8 +6,8 @@
     "watch": "",
     "test": "",
     "lint": "",
-    "lint:fix": "npm run lint -- --fix",
-    "lint:watch": "npm run lint -- --watch"
+    "lint:fix": "",
+    "lint:watch": ""
   },
   "dependencies": {
     "@mapbox/polylabel": "^1.0.2",

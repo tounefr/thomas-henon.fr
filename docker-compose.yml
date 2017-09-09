@@ -1,0 +1,22 @@
+version: "2"
+
+services:
+    app:
+        build:
+            context: docker/dev
+        depends_on:
+            - db
+        ports:
+            - 80:80
+        volumes:
+            - .:/app
+            - /app/var/cache
+            - /app/var/sessions
+
+    db:
+        image: mysql:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: symfony
+            MYSQL_USER: symfony
+            MYSQL_PASSWORD: symfony

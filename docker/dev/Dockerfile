@@ -12,8 +12,6 @@ ENV LANG="en_US.UTF-8" \
 EXPOSE 80
 WORKDIR /app
 
-COPY ./ /app
-
 RUN apt-get update -q && \
     apt-get install -qy software-properties-common language-pack-en-base && \
     export LC_ALL=en_US.UTF-8 && \
@@ -53,28 +51,24 @@ RUN apt-get update -q && \
         php-uuid \
         supervisor \
         tzdata \
-        wget
+        wget && \
 
-COPY ./ /app
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     cp /usr/share/zoneinfo/Europe/Paris /etc/localtime && echo "Europe/Paris" > /etc/timezone && \
+
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+
     curl -L -o /tmp/nodejs.tar.gz https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz && \
     tar xfvz /tmp/nodejs.tar.gz -C /usr/local --strip-components=1 && \
     rm -f /tmp/nodejs.tar.gz && \
     npm install yarn -g && \
-    mkdir /run/php && \
 
-    composer install --optimize-autoloader --no-interaction --no-ansi --no-dev && \
-    bin/console cache:clear --no-warmup && \
-    bin/console cache:warmup && \
+    mkdir /run/php
 
-    chown www-data:www-data -R var
-
-COPY docker/prod/php.ini /etc/php/7.1/cli/conf.d/50-setting.ini
-COPY docker/prod/pool.conf /etc/php/7.1/fpm/pool.d/www.conf
-COPY docker/prod/nginx.conf /etc/nginx/nginx.conf
-COPY docker/prod/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY php.ini /etc/php/7.1/cli/conf.d/50-setting.ini
+COPY pool.conf /etc/php/7.1/fpm/pool.d/www.conf
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

@@ -1,0 +1,48 @@
+machine:
+    node:
+        version: 4.5.0
+    php:
+        version: 7.1.0
+    environment:
+        YARN_VERSION: 0.18.1
+        PATH: "${PATH}:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+        DATABASE_HOST: 127.0.0.1
+        DATABASE_USER: ubuntu
+        DATABASE_PASSWORD: ''
+        DATABASE_NAME: circle_test
+    services:
+        - docker
+
+dependencies:
+    cache_directories:
+        - ~/.yarn
+        - ~/.cache/yarn
+        - ~/.composer/cache/files
+    pre:
+        - |
+            if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
+              curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
+            fi
+        - echo "memory_limit = 1152M" > /opt/circleci/php/$(phpenv global)/etc/conf.d/memory.ini
+    override:
+        - yarn install
+        - composer install --no-interaction
+
+test:
+    override:
+        # Lint and test JS
+        - yarn lint
+        - yarn test
+
+        # Prepare PHP tests
+        - rm -rf var/cache/test /tmp/data.db
+        - ./bin/console doctrine:schema:create --env=test_sqlite
+        - ./bin/console doctrine:schema:drop --force --env=test_mysql
+        - ./bin/console doctrine:schema:create --env=test_mysql
+#        - mkdir -p $CIRCLE_TEST_REPORTS/phpunit
+
+        # PHP unit and functional tests
+#        - ./vendor/bin/phpunit --log-junit $CIRCLE_TEST_REPORTS/phpunit/junit.xml
+
+        # Try to build production JS
+        - yarn run build-prod
