@@ -53,16 +53,22 @@ RUN apt-get update -q && \
         tzdata \
         wget && \
 
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+COPY ./ /app
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     cp /usr/share/zoneinfo/Europe/Paris /etc/localtime && echo "Europe/Paris" > /etc/timezone && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     curl -L -o /tmp/nodejs.tar.gz https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz && \
     tar xfvz /tmp/nodejs.tar.gz -C /usr/local --strip-components=1 && \
     rm -f /tmp/nodejs.tar.gz && \
     npm install yarn -g && \
-    mkdir /run/php
+    mkdir /run/php && \
 
-COPY ./ /app
+    composer install --optimize-autoloader --no-interaction --no-ansi && \
+    bin/console cache:clear --no-warmup && \
+    bin/console cache:warmup && \
+
+    chown www-data:www-data -R var
 
 COPY docker/dev/php.ini /etc/php/7.1/cli/conf.d/50-setting.ini
 COPY docker/dev/pool.conf /etc/php/7.1/fpm/pool.d/www.conf
