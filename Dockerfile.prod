@@ -53,7 +53,7 @@ RUN apt-get update -q && \
         php-uuid \
         supervisor \
         tzdata \
-        wget && \
+        wget
 
 COPY ./ /app
 
