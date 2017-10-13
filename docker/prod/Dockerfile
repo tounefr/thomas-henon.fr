@@ -66,9 +66,9 @@ RUN apt-get update -q && \
 
     mkdir /run/php
 
-COPY docker/prod/php.ini /etc/php/7.1/cli/conf.d/50-setting.ini
-COPY docker/prod/pool.conf /etc/php/7.1/fpm/pool.d/www.conf
-COPY docker/prod/nginx.conf /etc/nginx/nginx.conf
-COPY docker/prod/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY php.ini /etc/php/7.1/fpm/php.ini
+COPY pool.conf /etc/php/7.1/fpm/pool.d/www.conf
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

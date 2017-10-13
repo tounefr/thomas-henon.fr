@@ -1,0 +1,6 @@
+version: '2'
+
+services:
+    app:
+      build: .
+      command: ls && yarn install && yarn build-dev && composer install
