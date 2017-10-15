@@ -15,3 +15,5 @@ composer.lock
 supervisord.log
 supervisord.pid
 web/front/assets/js/assets.js
+piwik/
+.travis.yml
