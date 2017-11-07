@@ -1,7 +1,10 @@
 imports:
     - { resource: config.yml }
 
-parameters:
-    env(DATABASE_HOST): '%env(DATABASE_HOST)%'
-    env(DATABASE_USER): '%env(DATABASE_USER)%'
-    env(DATABASE_PASSWORD): '%env(DATABASE_PASS)%'
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     '%env(DATABASE_HOST)%'
+        dbname:   '%env(DATABASE_NAME)%'
+        user:     '%env(DATABASE_USER)%'
+        password: '%env(DATABASE_PASS)%'

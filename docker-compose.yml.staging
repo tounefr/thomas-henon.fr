@@ -1,0 +1,36 @@
+version: '2'
+
+networks:
+  default:
+    driver: bridge
+  web:
+    external:
+      name: webproxy_default
+
+services:
+    db:
+      image: mysql:5.7
+      environment:
+        - MYSQL_ROOT_PASSWORD="root"
+        - MYSQL_DATABASE=symfony
+        - MYSQL_USER=symfony
+        - MYSQL_PASSWORD="symfony"
+      volumes:
+        - ./db:/var/lib/mysql
+    app:
+      build:
+        context: docker/prod
+      networks:
+        - web
+      volumes:
+        - ./app:/app
+      environment:
+        - DATABASE_HOST="db"
+        - DATABASE_NAME="symfony"
+        - DATABASE_USER="symfony"
+        - DATABASE_PASS="symfony"
+      labels:
+        - "traefik.backend=blog_staging"
+        - "traefik.docker.network=web"
+        - "traefik.frontend.rule=Host:staging.toune.fr,staging.thomas-henon.fr"
+        - "traefik.enable=true"
