@@ -11,16 +11,21 @@ services:
     db:
       image: mysql:5.7
       environment:
-        - MYSQL_ROOT_PASSWORD="gB1qZIuY0SxuUozmHRBnTHBu"
+        - MYSQL_ROOT_PASSWORD="root"
         - MYSQL_DATABASE=symfony
         - MYSQL_USER=symfony
-        - MYSQL_PASSWORD="NHdNiX8K5XX6woTnxUEMp33W"
+        - MYSQL_PASSWORD="symfony"
       volumes:
         - ./db:/var/lib/mysql
-    php:
+    app:
       image: toune/blog
       networks:
         - web
+      environment:
+        - DATABASE_HOST="db"
+        - DATABASE_NAME="symfony"
+        - DATABASE_USER="symfony"
+        - DATABASE_PASS="symfony"
       labels:
         - "traefik.backend=blog"
         - "traefik.docker.network=web"

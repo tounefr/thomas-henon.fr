@@ -2,6 +2,6 @@ imports:
     - { resource: config.yml }
 
 parameters:
-    env(DATABASE_HOST): "db"
-    env(DATABASE_USER): "root"
-    env(DATABASE_PASSWORD): "root"
+    env(DATABASE_HOST): '%env(DATABASE_HOST)%'
+    env(DATABASE_USER): '%env(DATABASE_USER)%'
+    env(DATABASE_PASSWORD): '%env(DATABASE_PASS)%'
