@@ -19,6 +19,13 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/projects", name="projects")
+     */
+    public function projectsAction(Request $request) {
+        return $this->render('default/projects.html.twig');
+    }
+
+    /**
      * @Route("/", name="about")
      */
     public function aboutAction(Request $request)

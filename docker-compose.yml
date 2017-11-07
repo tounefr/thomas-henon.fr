@@ -11,7 +11,8 @@ services:
       volumes:
         - ./db:/var/lib/mysql
     app:
-      build: .
+      build:
+        context: ./docker/dev
       volumes:
         - ./app:/app
       ports:

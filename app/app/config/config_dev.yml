@@ -1,6 +1,9 @@
 imports:
     - { resource: config.yml }
 
+twig:
+    cache: false
+
 parameters:
     env(DATABASE_HOST): "db"
     env(DATABASE_USER): "root"
