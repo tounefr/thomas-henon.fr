@@ -11,10 +11,10 @@ services:
     db:
       image: mysql:5.7
       environment:
-        - MYSQL_ROOT_PASSWORD="root"
+        - MYSQL_ROOT_PASSWORD=root
         - MYSQL_DATABASE=symfony
         - MYSQL_USER=symfony
-        - MYSQL_PASSWORD="symfony"
+        - MYSQL_PASSWORD=symfony
       volumes:
         - ./db:/var/lib/mysql
     app:
@@ -22,10 +22,10 @@ services:
       networks:
         - web
       environment:
-        - DATABASE_HOST="db"
-        - DATABASE_NAME="symfony"
-        - DATABASE_USER="symfony"
-        - DATABASE_PASS="symfony"
+        - DATABASE_HOST=db
+        - DATABASE_NAME=symfony
+        - DATABASE_USER=symfony
+        - DATABASE_PASS=symfony
       labels:
         - "traefik.backend=blog"
         - "traefik.docker.network=web"
