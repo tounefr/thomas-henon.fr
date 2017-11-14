@@ -5,18 +5,19 @@ ENV LANG="en_US.UTF-8" \
     LANGUAGE="en_US.UTF-8" \
     TERM="xterm" \
     DEBIAN_FRONTEND="noninteractive" \
-    SYMFONY_ALLOW_APPDEV=1 \
+#    SYMFONY_ALLOW_APPDEV=1 \
+    SYMFONY_ENV=prod \
     NODE_VERSION=6.9.4 \
     COMPOSER_ALLOW_SUPERUSER=1
 
 EXPOSE 80
 
-RUN apt-get update -q && \
+RUN apt-get update -yq && \
     apt-get install -qy software-properties-common language-pack-en-base && \
     export LC_ALL=en_US.UTF-8 && \
     export LANG=en_US.UTF-8 && \
     add-apt-repository ppa:ondrej/php && \
-    apt-get update -q && \
+    apt-get update -yq && \
     apt-get install --no-install-recommends -qy \
         ca-certificates \
         cron \
@@ -70,14 +71,14 @@ COPY ./docker/prod/pool.conf /etc/php/7.1/fpm/pool.d/www.conf
 COPY ./docker/prod/nginx.conf /etc/nginx/nginx.conf
 COPY ./docker/prod/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-COPY ./app /app
-WORKDIR /app
+COPY ./app /www
+WORKDIR /www
 
-RUN chown www-data:www-data -R /app && \
-	chmod 775 -R /app && \
-	chmod 777 -R /app/var
+RUN chown www-data:www-data -R /www && \
+	chmod 775 -R /www && \
+	chmod 777 -R /www/var
 
 RUN yarn install && yarn build-dev
-RUN composer install
+RUN composer install --no-scripts
 
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

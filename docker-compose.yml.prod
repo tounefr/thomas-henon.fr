@@ -21,6 +21,7 @@ services:
       image: toune/blog
       networks:
         - web
+        - default
       environment:
         - DATABASE_HOST=db
         - DATABASE_NAME=symfony
