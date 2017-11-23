@@ -11,8 +11,14 @@ services:
       volumes:
         - ./db:/var/lib/mysql
     app:
-      build: .
+      build:
+        context: docker/dev
       volumes:
         - ./app:/www
+      environment:
+        - DATABASE_HOST=db
+        - DATABASE_NAME=symfony
+        - DATABASE_USER=symfony
+        - DATABASE_PASS=symfony
       ports:
         - 80:80

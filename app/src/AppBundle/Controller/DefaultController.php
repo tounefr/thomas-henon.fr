@@ -22,7 +22,15 @@ class DefaultController extends Controller
      * @Route("/projects", name="projects")
      */
     public function projectsAction(Request $request) {
-        return $this->render('default/projects.html.twig');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $projects_repo = $em->getRepository('AppBundle:Project');
+        $projects = $projects_repo->findAll();
+
+        return $this->render('default/projects.html.twig', array(
+            'projects' => $projects
+        ));
     }
 
     /**

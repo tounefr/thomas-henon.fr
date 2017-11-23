@@ -3,13 +3,17 @@
 {% block page_title %}Contact{% endblock %}
 
 {% block body %}
-    <section id="contact" class="content row container">
-        <h2><span class="glyphicon glyphicon-console" aria-hidden="true"></span> Contact</h2>
-        <p>Vous recevrez une réponse dans les 24h.</p>
-        <br />
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit" name="form-submit" class="btn btn-default"><span class="glyphicon glyphicon-send" aria-hidden="true">  Valider</button>
-        {{ form_end(form) }}
-    </section>
+    <div class="col-xs-12 col-md-6">
+        <section id="contact" class="content row container">
+            <h2><span class="glyphicon glyphicon-console" aria-hidden="true"></span> Contact</h2>
+            <br />
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" name="form-submit" class="btn btn-default"><span class="glyphicon glyphicon-send" aria-hidden="true">  Valider</button>
+            {{ form_end(form) }}
+        </section>
+    </div>
+    <div class="col-xs-12 col-md-3">
+        {% include 'contact/social_networks.html.twig' %}
+    </div>
 {% endblock %}

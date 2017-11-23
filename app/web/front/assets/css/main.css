@@ -743,3 +743,12 @@ section.container {
     padding: 0.1em;
     font-size: 16px;
 }
+
+#projects section ul {
+    margin: 0;
+    padding: 0;
+}
+
+#projects .description {
+    text-align: justify;
+}

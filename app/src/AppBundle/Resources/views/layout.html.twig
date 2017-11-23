@@ -30,12 +30,13 @@
             <a class="navbar-brand" href="{{ path('about') }}">thomas@henon:~/</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            {% set current_path = app.request.get('_route') %}
             <ul class="nav navbar-nav">
-                <li><a href="{{ path('about') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"> A propos</a></li>
-                <li><a href="{{ path('article_index') }}"><span class="glyphicon glyphicon-comment" aria-hidden="true"> Blog</a></li>
-                <!--<li><a href="{{ path('projects') }}"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"> Projets</a></li>-->
-                <li><a href="{{ path('cv') }}"><span class="glyphicon glyphicon-tag" aria-hidden="true"> CV</a></li>
-                <li><a href="{{ path('contact') }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+                <li {% if current_path == 'about' %}class="active"{% endif %}><a href="{{ path('about') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> A propos</a></li>
+                <li {% if current_path == 'article_index' %}class="active"{% endif %}><a href="{{ path('article_index') }}"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Blog</a></li>
+                <li {% if current_path == 'projects' %}class="active"{% endif %}><a href="{{ path('projects') }}"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Projets</a></li>
+                <li {% if current_path == 'cv' %}class="active"{% endif %}><a href="{{ path('cv') }}"><span class="glyphicon glyphicon-tag" aria-hidden="true"></span> CV</a></li>
+                <li {% if current_path == 'contact' %}class="active"{% endif %}><a href="{{ path('contact') }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right hidden-xs">
                 <li>

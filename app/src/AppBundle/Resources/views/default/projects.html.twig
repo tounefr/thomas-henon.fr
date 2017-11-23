@@ -4,5 +4,112 @@
 
 {% block body %}
 
+    <div class="projects">
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-xs-12 col-md-6">
+                <section class="content row container">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <h2><span class="glyphicon glyphicon-console" aria-hidden="true"></span> {{ project.getTitle() }}</h2>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <h3 class="btn pull-right">{{ project.getDate()|date('d/m/Y') }}</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <h3 class=" col-md-6">Description</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <p class="description">{{ project.getDescription() }}</p>
+                                </div>
+
+                                {% if project.getPictures()|length > 0 %}
+                                    <div class="col-xs-12 col-md-6">
+                                        <div id="carousel-{{ project.getId() }}" class="carousel slide" data-ride="carousel">
+                                            <ol class="carousel-indicators">
+                                                {% set i = -1 %}
+                                                {% for picture in project.getPictures() %}
+                                                    {% set i = i + 1 %}
+                                                    <li data-target="#carousel-{{ project.getId() }}" data-slide-to="{{ picture.getId() }}" {% if i == 0 %}class="active"{% endif %}></li>
+                                                {% endfor %}
+                                            </ol>
+
+                                            <div class="carousel-inner" role="listbox">
+                                                {% set i = -1 %}
+                                                {% for picture in project.getPictures() %}
+                                                    {% set i = i + 1 %}
+                                                    <div class="item {% if i == 0 %}active{% endif %}">
+                                                        <img src="{{ picture.getPath() }}" alt="{{ picture.getName() }}">
+                                                        <div class="carousel-caption">
+                                                            {{ picture.getDescription() }}
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+
+                                            {% if project.getPictures()|length > 1 %}
+                                            <a class="left carousel-control" href="#carousel-{{ project.getId() }}" role="button" data-slide="prev">
+                                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="right carousel-control" href="#carousel-{{ project.getId() }}" role="button" data-slide="next">
+                                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                {% if project.getTechnologies()|length > 0 %}
+                                <div class="col-xs-12 col-md-6">
+                                    <h3>Technologies utilisées</h3>
+                                    <ul>
+                                        {% for techno in project.getTechnologies() %}
+                                        <li><span class="glyphicon glyphicon-triangle-right"></span> {{ techno.getName() }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% endif %}
+                                {% if project.getLinks()|length > 0 %}
+                                <div class="col-xs-12 col-md-6">
+                                    <h3>Liens</h3>
+                                    <ul>
+                                        {% for link in project.getLinks() %}
+                                        <li><span class="glyphicon glyphicon-link"></span> <a href="http://localhost" target="_blank">{{ link.getName() }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <!--
+        <div class="row">
+            <div class="col-xs-4">
+                <section class="content row container">
+                    <iframe allowtransparency="true" frameborder="0" scrolling="no" seamless="seamless"
+                            src="http://colmdoyle.github.io/gh-activity/gh-activity.html?user=tounefr&type=user" width="100%" height="300"></iframe>
+                </section>
+            </div>
+        </div>
+        -->
+
+    </div>
 
 {% endblock %}

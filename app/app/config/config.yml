@@ -126,12 +126,22 @@ easy_admin:
             - email
             - ip
             - title
+      Project:
+        class: AppBundle\Entity\Project
+        form:
+          fields:
+            - title
+            - description
+            - { property: 'technologies', label: 'Technologies', type: 'collection', type_options: {entry_type: 'AppBundle\Form\ProjectTechnologyType', by_reference: false} }
+            - { property: 'links', label: 'Links', type: 'collection', type_options: {entry_type: 'AppBundle\Form\ProjectLinkType', by_reference: false} }
+            - { property: 'pictures', label: 'Pictures', type: 'collection', type_options: {entry_type: 'AppBundle\Form\ProjectPictureType', by_reference: false, allow_add: true} }
+#            - { property: 'pictures', type: 'AppBundle\Form\ProjectPictureType', type_options: { required: true } }
 
 ivory_ck_editor:
     default_config:                     default_config    # Utiliser par defaut la configuration my_custom_config
     configs:
         default_config:
-            toolbar:                    "standard"          # Charger la toolbar tollbar_1 (voir plus bas)
+            toolbar:                    "basic"          # Charger la toolbar tollbar_1 (voir plus bas)
             uiColor:                    "#FCFCFC"           # Couleur de fond de l'interface
             contentsCss:                ['bundles/app/css/style.css'] # Charge les styles dans l'éditeur (permet de voir en temps réel le résultat)
 
