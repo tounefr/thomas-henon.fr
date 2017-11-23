@@ -6,11 +6,12 @@ ENV LANG="en_US.UTF-8" \
     TERM="xterm" \
     DEBIAN_FRONTEND="noninteractive" \
     SYMFONY_ALLOW_APPDEV=1 \
+    SYMFONY_ENV=dev \ 
     NODE_VERSION=6.9.4 \
     COMPOSER_ALLOW_SUPERUSER=1
 
 EXPOSE 80
-WORKDIR /app
+WORKDIR /www
 
 RUN apt-get update -q && \
     apt-get install -qy software-properties-common language-pack-en-base && \
