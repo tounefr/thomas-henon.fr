@@ -1,9 +1,9 @@
 {% for comment in comments|sort|reverse %}
     {% if comment.getIsApproved() %}
-        <section id="comment{{ comment.id }}" class="content row container">
+        <section id="comment{{ comment.id }}" class="content container">
             <div class="row">
                 <div class="comment_head">
-                    <h4 class="">{{ comment.getPseudo() }}</h4>
+                    <h4>{{ comment.getPseudo() }}</h4>
                     <time><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{ comment.date|date('Y-m-d H:i:s') }}</time>
                 </div>
                 <p>

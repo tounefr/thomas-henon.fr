@@ -2,27 +2,23 @@
 
     <div id="article_comments">
         <div class="row">
-            <div class="col-md-8">
-
-                <section class="content row container">
+                <section class="content container">
                     <div class="row">
-                        {% if comments|length > 0 %}
-                            <h4 class="text-center">Réagissez à cet article en postant un commentaire</h4>
-                        {% else %}
-                            <h4 class="text-center">Soyez le premier à rédiger un commentaire !</h4>
-                        {% endif %}
-                        {{ form_start(new_comment_form) }}
-                        {{ form_widget(new_comment_form) }}
-                        <button type="submit" name="form-submit" class="btn btn-default"><span class="glyphicon glyphicon-send" aria-hidden="true">  Valider</button>
-                        {{ form_end(new_comment_form) }}
+                        <div class="col-xs-12">
+                            {% if comments|length > 0 %}
+                                <h4 class="text-center">Réagissez à cet article en postant un commentaire</h4>
+                            {% else %}
+                                <h4 class="text-center">Soyez le premier à rédiger un commentaire !</h4>
+                            {% endif %}
+                            {{ form_start(new_comment_form) }}
+                            {{ form_widget(new_comment_form) }}
+                            <button type="submit" name="form-submit" class="btn btn-default"><span class="glyphicon glyphicon-send" aria-hidden="true">  Valider</button>
+                            {{ form_end(new_comment_form) }}
+                        </div>
                     </div>
                 </section>
 
-
                 {% include 'article/comment/comment.html.twig' with { 'comments': comments } %}
-
-
-            </div>
         </div>
     </div>
 

@@ -39,12 +39,12 @@
                         <h2 class="row">
                             <span class="glyphicon glyphicon-console" aria-hidden="true"></span> Derniers articles
                         </h2>
-                        <div>
+                        <div class="row">
                             <ul>
                                 {%  for article in lastArticles %}
-                                    <li class="row">
-                                        <div class="col-md-10 col-xs-12"><a href="{{ path('article_show', { 'id': article.id, 'slug': article.slug }) }}">{{ article.title }}</a></div>
-                                        <div class="col-md-2 col-xs-12"><time>{{  article.date|date('d/m/Y') }}</time></div>
+                                    <li>
+                                        <a href="{{ path('article_show', { 'id': article.id, 'slug': article.slug }) }}">{{ article.title }}</a>
+                                        <time>{{  article.date|date('d/m/Y') }}</time>
                                     </li>
                                 {% endfor %}
                             </ul>
