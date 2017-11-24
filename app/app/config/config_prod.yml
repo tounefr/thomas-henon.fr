@@ -1,4 +1,5 @@
 imports:
+    - { resource: security.yml }
     - { resource: config.yml }
 
 doctrine:
@@ -8,3 +9,17 @@ doctrine:
         dbname:   '%env(DATABASE_NAME)%'
         user:     '%env(DATABASE_USER)%'
         password: '%env(DATABASE_PASS)%'
+
+monolog:
+    handlers:
+        main:
+            type: fingers_crossed
+            action_level: error
+            handler: nested
+        nested:
+            type: stream
+            path: '%kernel.logs_dir%/%kernel.environment%.log'
+            level: error
+        console:
+            type: console
+            process_psr_3_messages: false
