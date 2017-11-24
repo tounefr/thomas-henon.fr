@@ -118,7 +118,7 @@ class ArticleController extends Controller
     /**
      * Finds and displays a article entity.
      *
-     * @Route("/{id}/{slug}", name="article_show")
+     * @Route("/article/{slug}", name="article_show")
      * @Method({"GET", "POST"})
      */
     public function showAction(Article $article, Request $request, \Swift_Mailer $mailer)

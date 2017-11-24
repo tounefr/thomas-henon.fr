@@ -26,7 +26,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $projects_repo = $em->getRepository('AppBundle:Project');
-        $projects = $projects_repo->findAll();
+        $projects = $projects_repo->findBy(array(), array('id' => 'desc'));
 
         return $this->render('default/projects.html.twig', array(
             'projects' => $projects

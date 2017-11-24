@@ -37,6 +37,7 @@ framework:
     translator: { fallbacks: [en] }
 
     profiler:
+      only_exceptions: false
       matcher:
         service: AppBundle\Profiler\AdminMatcher
 
@@ -160,3 +161,9 @@ vich_uploader:
       article_thumbnail:
         uri_prefix:         %app.path.article_thumbnail%
         upload_destination: %kernel.root_dir%/../web/uploads/thumbnails
+
+web_profiler:
+    toolbar:              true
+    position:             bottom
+    intercept_redirects:  false
+    excluded_ajax_paths:  ^/bundles|^/_wdt

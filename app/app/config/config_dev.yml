@@ -4,6 +4,9 @@ imports:
 twig:
     cache: false
 
+assetic:
+    use_controller: false
+
 parameters:
     env(DATABASE_HOST): "db"
     env(DATABASE_USER): "root"

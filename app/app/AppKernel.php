@@ -34,12 +34,20 @@ class AppKernel extends Kernel
             new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
 
             new Vich\UploaderBundle\VichUploaderBundle(),
+
+            // Debug
+            new Symfony\Bundle\DebugBundle\DebugBundle(),
+            new Sensio\Bundle\DistributionBundle\SensioDistributionBundle(),
+            new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
+
+            /*
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
-            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
+            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
+               */
 
             if ('dev' === $this->getEnvironment()) {
                 $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
