@@ -2,14 +2,14 @@
     <article>
         <h2>
             <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
-            <a href="{{ path('article_show', { 'id': article.id, 'slug': article.slug }) }}">{{ article.title }}</a>
+            <a href="{{ path('article_show', { 'slug': article }) }}">{{ article.title }}</a>
         </h2>
         <hr />
 <!--        <img class="article_thumbnail hidden-xs" width=650 height=150 src="{{ article.image }}" />-->
         <p class="row article_content text-justify">
             {% if article.content|raw|length > 50 and app.request.attributes.get('_route') != 'article_show' %}
                 {{ article.content|raw|slice(0, 200)|raw }}...
-                <a href="{{ path('article_show', { 'id': article.id, 'slug': article.slug }) }}" class="read_article">Lire la suite</a>
+                <a href="{{ path('article_show', { 'slug': article }) }}" class="read_article">Lire la suite</a>
             {% else %}
                 {{ article.content|raw }}
             {% endif %}

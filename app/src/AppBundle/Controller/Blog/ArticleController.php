@@ -31,8 +31,9 @@ class ArticleController extends Controller
      * @Route("/articles/{page}",
      *     requirements={"page" = "\d+"},
      *     name="article_index")
-     * @Route("/articles/{page}/{category}",
+     * @Route("/articles/{category}/{page}",
      *     requirements={"page" = "\d+"},
+     *     defaults={"page": 1},
      *     name="article_index")
      * @Method("GET")
      */

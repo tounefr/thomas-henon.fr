@@ -88,6 +88,11 @@ class Article
      */
     private $imageFile;
 
+    public function __toString()
+    {
+        return $this->slug;
+    }
+
     /**
      * Get id
      *

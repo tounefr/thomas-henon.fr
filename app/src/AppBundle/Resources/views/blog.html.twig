@@ -46,7 +46,7 @@
                 {% if article is defined %}
                     <li><a href="{{ path('article_index', {'category': article.getCategory().getName() }) }}">{{ article.getCategory().getName() }}</a></li>
                     {% if article.title is defined %}
-                        <li class="active"><a href="{{ path('article_show', {'id': article.getId(), 'slug': article.getSlug()}) }}">{{ article.title }}</a></li>
+                        <li class="active"><a href="{{ path('article_show', { 'slug': article.getSlug() }) }}">{{ article.title }}</a></li>
                     {% endif %}
                 {% endif %}
             </ol>

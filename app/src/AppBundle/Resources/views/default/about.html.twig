@@ -43,7 +43,7 @@
                             <ul>
                                 {%  for article in lastArticles %}
                                     <li>
-                                        <a href="{{ path('article_show', { 'id': article.id, 'slug': article.slug }) }}">{{ article.title }}</a>
+                                        <a href="{{ path('article_show', { 'slug': article }) }}">{{ article.title }}</a>
                                         <time>{{  article.date|date('d/m/Y') }}</time>
                                     </li>
                                 {% endfor %}
