@@ -349,7 +349,7 @@ form {
     display: block;
     margin: auto;
     text-align: center;
-    border-radius: 100px;
+    /*border-radius: 100px;*/
 }
 
 #img_profil a {
